@@ -12,7 +12,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
+  CarouselNext,   
   CarouselPrevious,
 } from '@/components/ui/carousel';
 
