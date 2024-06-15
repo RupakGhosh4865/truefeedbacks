@@ -74,7 +74,8 @@ export default function SignInForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email/Username</FormLabel>
+                  <FormLabel>Email/Username            
+                  ---------testusername-rupak78ghosh</FormLabel>
                   <Input {...field} />
                   <FormMessage />
                 </FormItem>
@@ -85,7 +86,8 @@ export default function SignInForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Password          
+                  -------------test-password-1qaz0plm</FormLabel>
                   <Input type="password" {...field} />
                   <FormMessage />
                 </FormItem>
