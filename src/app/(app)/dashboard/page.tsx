@@ -16,7 +16,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AcceptMessageSchema } from '@/schemas/acceptMessageSchema';
 
-function UserDashboard() {
+export default function UserDashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSwitchLoading, setIsSwitchLoading] = useState(false);
@@ -134,64 +134,84 @@ function UserDashboard() {
   };
 
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
-      <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
+    <div className="my-10 mx-4 md:mx-8 lg:mx-auto p-10 bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white rounded-lg shadow-2xl w-full max-w-6xl font-[Poppins]">
+      <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
+        User Dashboard
+      </h1>
 
-      <div className="mb-4">
-        <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{' '}
-        <div className="flex items-center">
+      {/* Unique Link Section */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Copy Your Unique Link</h2>
+        <div className="flex items-center space-x-4">
           <input
             type="text"
             value={profileUrl}
             disabled
-            className="input input-bordered w-full p-2 mr-2"
+            className="bg-gray-100 text-gray-700 p-3 rounded-lg border-2 border-gray-300 w-full shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          <Button onClick={copyToClipboard}>Copy</Button>
+          <Button
+            onClick={copyToClipboard}
+            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-3 px-6 rounded-lg shadow-md transform transition-transform hover:scale-105"
+          >
+            Copy
+          </Button>
         </div>
       </div>
 
-      <div className="mb-4">
+      {/* Accept Messages Switch */}
+      <div className="mb-8 flex items-center">
         <Switch
           {...register('acceptMessages')}
           checked={acceptMessages}
           onCheckedChange={handleSwitchChange}
           disabled={isSwitchLoading}
+          className="transition-transform duration-300 ease-in-out transform hover:scale-105"
         />
-        <span className="ml-2">
+        <span className="ml-3 text-lg md:text-xl">
           Accept Messages: {acceptMessages ? 'On' : 'Off'}
         </span>
       </div>
-      <Separator />
 
-      <Button
-        className="mt-4"
-        variant="outline"
-        onClick={(e) => {
-          e.preventDefault();
-          fetchMessages(true);
-        }}
-      >
-        {isLoading ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
-        ) : (
-          <RefreshCcw className="h-4 w-4" />
-        )}
-      </Button>
-      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <Separator className="my-8 bg-gray-300" />
+
+      {/* Fetch Messages Button */}
+      <div className="flex justify-center">
+        <Button
+          className="bg-purple-600 hover:bg-purple-500 text-white py-3 px-8 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-110"
+          onClick={(e) => {
+            e.preventDefault();
+            fetchMessages(true);
+          }}
+        >
+          {isLoading ? (
+            <Loader2 className="h-5 w-5 animate-spin" />
+          ) : (
+            <RefreshCcw className="h-5 w-5" />
+          )}
+        </Button>
+      </div>
+
+      {/* Messages Grid */}
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
         {messages.length > 0 ? (
-          messages.map((message, index) => (
-            <MessageCard
+          messages.map((message) => (
+            <div
               key={message._id as string}
-              message={message}
-              onMessageDelete={handleDeleteMessage}
-            />
+              className="bg-white text-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 ease-in-out"
+            >
+              <MessageCard
+                message={message}
+                onMessageDelete={handleDeleteMessage}
+              />
+            </div>
           ))
         ) : (
-          <p>No messages to display.</p>
+          <p className="text-center text-lg text-white">No messages to display.</p>
         )}
       </div>
     </div>
   );
+  
 }
 
-export default UserDashboard;
+

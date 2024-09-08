@@ -59,13 +59,13 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-800">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-800 via-purple-700 to-pink-600">
+      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-xl transform transition-all duration-500 hover:scale-105">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
+          <h1 className="text-4xl font-extrabold tracking-tight font-[Poppins] lg:text-5xl mb-6 text-gray-900">
             Welcome Back to True Feedback
           </h1>
-          <p className="mb-4">Sign in to continue your secret conversations</p>
+          <p className="mb-4 text-gray-600">Sign in to continue your secret conversations</p>
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -74,9 +74,11 @@ export default function SignInForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email/Username            
-                  ---------testusername-rupak78ghosh</FormLabel>
-                  <Input {...field} />
+                  <FormLabel className="font-semibold text-gray-800">Email/Username  [Test U-rupak78ghosh]</FormLabel>
+                  <Input
+                    {...field}
+                    className="block w-full p-3 mt-2 border rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  />
                   <FormMessage />
                 </FormItem>
               )}
@@ -86,20 +88,28 @@ export default function SignInForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password          
-                  -------------test-password-1qaz0plm</FormLabel>
-                  <Input type="password" {...field} />
+                  <FormLabel className="font-semibold text-gray-800">Password  [Test P-1qaz0plm]</FormLabel>
+                  <Input
+                    type="password"
+                    {...field}
+                    className="block w-full p-3 mt-2 border rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  />
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button className='w-full' type="submit">Sign In</Button>
+            <Button
+              className="w-full py-3 mt-6 bg-gradient-to-r from-purple-600 via-blue-500 to-teal-400 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+              type="submit"
+            >
+              Sign In
+            </Button>
           </form>
         </Form>
         <div className="text-center mt-4">
-          <p>
+          <p className="text-gray-600">
             Not a member yet?{' '}
-            <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
+            <Link href="/sign-up" className="text-purple-500 hover:text-purple-700">
               Sign up
             </Link>
           </p>

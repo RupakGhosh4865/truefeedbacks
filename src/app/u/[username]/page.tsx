@@ -91,13 +91,12 @@ export default function SendMessage() {
       complete('');
     } catch (error) {
       console.error('Error fetching messages:', error);
-      // Handle error appropriately
     }
   };
 
   return (
-    <div className="container mx-auto my-8 p-6 bg-white rounded max-w-4xl">
-      <h1 className="text-4xl font-bold mb-6 text-center">
+    <div className="container mx-auto my-8 p-6 bg-gradient-to-r from-purple-500 via-teal-400 to-blue-500 rounded max-w-4xl shadow-xl">
+      <h1 className="text-5xl font-extrabold text-white mb-8 text-center">
         Public Profile Link
       </h1>
       <Form {...form}>
@@ -107,11 +106,11 @@ export default function SendMessage() {
             name="content"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Send Anonymous Message to @{username}</FormLabel>
+                <FormLabel className="text-white">Send Anonymous Message to @{username}</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Write your anonymous message here"
-                    className="resize-none"
+                    className="resize-none rounded-lg border-2 border-teal-300 focus:border-purple-300 focus:ring-2 focus:ring-purple-500"
                     {...field}
                   />
                 </FormControl>
@@ -121,12 +120,16 @@ export default function SendMessage() {
           />
           <div className="flex justify-center">
             {isLoading ? (
-              <Button disabled>
+              <Button disabled className="bg-gray-300">
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Please wait
               </Button>
             ) : (
-              <Button type="submit" disabled={isLoading || !messageContent}>
+              <Button
+                type="submit"
+                disabled={isLoading || !messageContent}
+                className="bg-purple-600 hover:bg-purple-500 text-white py-2 px-4 rounded-lg transition duration-300"
+              >
                 Send It
               </Button>
             )}
@@ -138,16 +141,16 @@ export default function SendMessage() {
         <div className="space-y-2">
           <Button
             onClick={fetchSuggestedMessages}
-            className="my-4"
+            className="bg-teal-500 hover:bg-teal-400 text-white py-2 px-4 rounded-lg transition duration-300"
             disabled={isSuggestLoading}
           >
             Suggest Messages
           </Button>
-          <p>Click on any message below to select it.</p>
+          <p className="text-white">Click on any message below to select it.</p>
         </div>
-        <Card>
+        <Card className="bg-white shadow-lg rounded-lg">
           <CardHeader>
-            <h3 className="text-xl font-semibold">Messages</h3>
+            <h3 className="text-xl font-semibold text-gray-800">Messages</h3>
           </CardHeader>
           <CardContent className="flex flex-col space-y-4">
             {error ? (
@@ -157,7 +160,7 @@ export default function SendMessage() {
                 <Button
                   key={index}
                   variant="outline"
-                  className="mb-2"
+                  className="border-teal-500 text-teal-500 hover:bg-teal-50"
                   onClick={() => handleMessageClick(message)}
                 >
                   {message}
@@ -167,11 +170,13 @@ export default function SendMessage() {
           </CardContent>
         </Card>
       </div>
-      <Separator className="my-6" />
+      <Separator className="my-6 border-white" />
       <div className="text-center">
-        <div className="mb-4">Get Your Message Board</div>
+        <div className="mb-4 text-white">Get Your Message Board</div>
         <Link href={'/sign-up'}>
-          <Button>Create Your Account</Button>
+          <Button className="bg-pink-500 hover:bg-pink-400 text-white py-2 px-4 rounded-lg">
+            Create Your Account
+          </Button>
         </Link>
       </div>
     </div>
